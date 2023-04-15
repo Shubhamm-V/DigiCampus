@@ -3,10 +3,12 @@ import { Button, Col, Menu, Row } from "antd";
 import { MENU_ITEMS } from "../../utils/menu";
 import classes from "./MenuTop.module.scss";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 const MenuTop = (props) => {
   const [current, setCurrent] = useState("mail");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [toggleMenu, setToggleMenu] = useState(false);
+  const navigate = useNavigate();
 
   // to get screenwidht for managing responsiveness as screenwidht decrease or increase
   useEffect(() => {
@@ -21,6 +23,7 @@ const MenuTop = (props) => {
   // action to be performed after clicking menu
   const onClick = (e) => {
     console.log("click ", e);
+    navigate(`${e.key}`)
     setCurrent(e.key);
   };
 
@@ -65,7 +68,7 @@ const MenuTop = (props) => {
           xs={windowWidth > 320 ? 12 : 11}
         >
           <img
-            src="assets/images/applogo.svg"
+            src="applogo.png"
             alt="app logo"
             className={classes.appLogo}
           />
@@ -86,6 +89,7 @@ const MenuTop = (props) => {
             className={classes.menuWithItems}
             onClick={onClick}
             selectedKeys={[current]}
+            defaultActiveFirst={['/']}
             mode={windowWidth <= 930 ? "inline" : "horizontal"}
             items={MENU_ITEMS}
           />
@@ -102,7 +106,7 @@ const MenuTop = (props) => {
             className={classes.exploreButton}
             type = "primary"
           >
-          Login With Google
+           Google Login
           </Button>
         </Col>
       </Row>

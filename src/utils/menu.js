@@ -1,19 +1,19 @@
 export const MENU_ITEMS = [
     {
       label: "Home",
-      key: "home",
-   
+      key: "/",
     },
     {
       label: "Attendance",
-      key: "attendance",
+      key: "pages/attendance",
+
  
     },
     {
       label: "Scholarship",
-      key: "Scholarship",
+      key: "pages/Scholarship",
  
-    },
+    },  
   
     {
       label: "Certificates",
@@ -21,8 +21,8 @@ export const MENU_ITEMS = [
   
     },
     {
-      label: "Validator",
-      key: "validator",
+      label: "Digital ID",
+      key: "digital_id",
  
     },
     {
