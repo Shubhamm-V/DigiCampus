@@ -1,13 +1,77 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Roboto:wght@300&display=swap";
+
+:root {
+  --theme-color: #222831;
+  --subtheme-color: #393e46;
+  --primary-color: #00adb5;
+  --sub-primary-color: #eeeeee;
+}
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important;
+  font-family: "Oxygen mono", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--subtheme-color) !important;
+}
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--oxygenMono), source-code-pro, Menlo, Monaco, Consolas,
+  "Courier New", monospace;
+}
+
+
+.ant-menu-submenu-title:hover {
+  .ant-menu-submenu-arrow::before,
+  .ant-menu-submenu-arrow::after {
+    background: var(--primary-color) !important;
+  }
+}
+
+.ant-menu > .ant-menu-title-content :hover {
+  color: var(--primary-color);
+}
+:where(.css-dev-only-do-not-override-22j71r).ant-menu-light.ant-menu-submenu
+  > .ant-menu {
+  color: var(--sub-primary-color);
+  background-color: var(--subtheme-color);
+}
+
+.ant-menu-submenu-title:hover:not(.ant-menu-selected):not(
+    .ant-submenu-selected
+  ) {
+  color: var(--primary-color) !important;
+}
+
+.ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-item-active {
+  color: var(--primary-color) !important;
+}
+
+.ant-menu-light .ant-menu-item-selected {
+  background-color: var(--sub-theme-color) !important;
+}
+
+.ant-input::placeholder {
+  color: gray !important;
+}
+
+
+.container {
+  padding-inline: 8vw;
+}
+
+
+@media (max-width: 1200px) {
+  .container {
+     padding-inline: 2rem !important;
+  }
 }
