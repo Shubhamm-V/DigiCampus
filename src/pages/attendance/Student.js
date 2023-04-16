@@ -17,7 +17,7 @@ const Student = () => {
       setData(scanData);
       setStartScan(false);
       setLoadingScan(false);
-      console.log(startScan, loadingScan)
+      console.log(startScan, loadingScan);
       // setPrecScan(scanData);
     }
   };
@@ -48,6 +48,7 @@ const Student = () => {
                 defaultValue={selected}
                 className={classes.selectOptions}
                 onChange={onSelectChange}
+                style={{ marginBottom: "1.5rem" }}
                 allowClear
                 options={[
                   {
@@ -61,7 +62,7 @@ const Student = () => {
                 ]}
               />
               <QrReader
-                facingMode={selected}
+                constraints={{ facingMode: selected }}
                 onScan={handleScan}
                 onResult={(result, error) => {
                   if (!!result) {
