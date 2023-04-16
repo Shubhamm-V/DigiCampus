@@ -11,7 +11,7 @@ const Student = () => {
   const [showQR, setShowQR] = useState(false);
 
   useEffect(()=>{
-    setSelected('environment')
+    setSelected('user')
   },[])
 
   const handleScan = async (scanData) => {
