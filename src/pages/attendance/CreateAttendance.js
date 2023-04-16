@@ -23,7 +23,10 @@ const CreateAttendance = ({ docID }) => {
 
   const onFinish = (values) => {
     // setValue(values);
-
+    let date = new Date().toLocaleString();
+    let unique = values.subject + values.branch + date;
+    unique = unique.trim();
+    setIdentifier(unique);
     const userRef = db.collection("users").doc(docID).collection("students");
     // Query the orders subcollection to retrieve all order documents
     let arrayData = [];
@@ -39,17 +42,13 @@ const CreateAttendance = ({ docID }) => {
       .catch((error) => {
         console.log("Error getting orders: ", error);
       });
-      let date = new Date().toLocaleString();
-      let unique = values.subject+values.branch+values.date;
-      unique = unique.trim();
-      setIdentifier(unique);
-      db.collection("users").doc(docID).collection("attendances").add({
-        subject: values.subject,
-        branch: values.branch,  
-        total_students: values.total_students,
-        date,
-        unique
-      });
+    db.collection("users").doc(docID).collection("attendances").add({
+      subject: values.subject,
+      branch: values.branch,
+      total_students: values.total_students,
+      date,
+      unique,
+    });
     setQRVisible(true);
     formRef.current?.resetFields();
     console.log("Success:", values);
@@ -177,7 +176,7 @@ const CreateAttendance = ({ docID }) => {
             ) : (
               <QRCode
                 title={qrValue.name}
-                value={`${qrValue.rollno}"," ${indentifier}`}
+                value={`${qrValue.rollno}",", ${qrValue.name}"," ${qrValue.branch} "," ${indentifier}`}
                 bgColor={"#fff"}
                 fgColor={"#000"}
               />
@@ -189,7 +188,7 @@ const CreateAttendance = ({ docID }) => {
               style={{ display: "flex", justifyContent: "center" }}
             >
               <h3 style={{ color: "var(--sub-primary-color)" }}>
-                {qrValue.name}  {qrValue.rollno}
+                {qrValue.name} {qrValue.rollno}
               </h3>
             </Col>
           )}
