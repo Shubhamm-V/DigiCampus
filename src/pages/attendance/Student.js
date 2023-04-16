@@ -17,6 +17,7 @@ const Student = () => {
       setData(scanData);
       setStartScan(false);
       setLoadingScan(false);
+      console.log(startScan, loadingScan)
       // setPrecScan(scanData);
     }
   };
