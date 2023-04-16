@@ -39,6 +39,7 @@ const CreateAttendance = ({ docID }) => {
       .catch((error) => {
         console.log("Error getting orders: ", error);
       });
+      let date = new Date().toLocaleString();
       let unique = values.subject+values.branch+values.date;
       unique = unique.trim();
       setIdentifier(unique);
@@ -46,7 +47,7 @@ const CreateAttendance = ({ docID }) => {
         subject: values.subject,
         branch: values.branch,  
         total_students: values.total_students,
-        date: new Date().toLocaleString(),
+        date,
         unique
       });
     setQRVisible(true);
