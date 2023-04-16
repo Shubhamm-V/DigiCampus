@@ -24,7 +24,7 @@ const Teacher = () => {
     console.log("click ", e.key);
   };
   return (
-    <Row>
+    <Row gutter={[15]}>
       <Col span={5} sm={9} lg={5} xs={24}>
         <Menu
           onClick={onClick}

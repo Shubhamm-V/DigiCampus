@@ -97,6 +97,10 @@ color: var(--sub-primary-color);
 }
 @media (max-width: 1200px) {
   .container {
-     padding-inline: 2rem !important;
+     padding-inline: 0.5rem !important;
   }
+  .ant-tabs-tab-btn {
+    font-size: 1rem;
+  }
+  
 }

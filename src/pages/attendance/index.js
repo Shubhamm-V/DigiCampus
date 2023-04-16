@@ -24,7 +24,7 @@ const Attendance = () => {
       <Row>
         <Col span={24} className={classes.tabsContainer}>
           <Tabs
-            defaultActiveKey="2"
+            defaultActiveKey="1"
             items={items}
             onChange={onChange}
             className={classes.attendanceTabs}
