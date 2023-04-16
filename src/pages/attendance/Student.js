@@ -63,7 +63,8 @@ const Student = () => {
                   fontWeight: "bold",
                 }}
               >
-                {data &&  "Present"}
+                {data + '-'}
+                {data && "Present"}
               </p>
             </Col>
           </Row>
