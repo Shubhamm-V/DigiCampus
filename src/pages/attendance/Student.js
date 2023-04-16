@@ -1,14 +1,19 @@
-import { Row, Col, Button, Select } from "antd";
-import React from "react";
+import { Row, Col, Button } from "antd";
+import React, { useEffect } from "react";
 import classes from "./index.module.scss";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 const Student = () => {
   const [data, setData] = useState("");
-  const [selected, setSelected] = useState("environment");
+  const [selected, setSelected] = useState("");
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
+
+  useEffect(()=>{
+    setSelected('environment')
+  },[])
+
   const handleScan = async (scanData) => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
@@ -20,9 +25,6 @@ const Student = () => {
       console.log(startScan, loadingScan);
       // setPrecScan(scanData);
     }
-  };
-  const onSelectChange = (value) => {
-    setSelected(value);
   };
   return (
     <Row>
@@ -44,23 +46,6 @@ const Student = () => {
               xs={24}
               className={classes.scanContainer}
             >
-              <Select
-                defaultValue={selected}
-                className={classes.selectOptions}
-                onChange={onSelectChange}
-                style={{ marginBottom: "1.5rem" }}
-                allowClear
-                options={[
-                  {
-                    value: "environment",
-                    label: "Back Camera",
-                  },
-                  {
-                    value: "user",
-                    label: "Front Camera",
-                  },
-                ]}
-              />
               <QrReader
                 constraints={{ facingMode: selected }}
                 onScan={handleScan}
