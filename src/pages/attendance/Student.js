@@ -4,31 +4,37 @@ import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 const Student = () => {
   const [data, setData] = useState("No result");
+  const [showQR, setShowQR] = useState(false);
   return (
     <Row>
       <Col span={24}>
-        <Button type="primary" style={{ marginTop: "1rem" }}>
+        <Button
+          type="primary"
+          style={{ marginTop: "1rem" }}
+          onClick={() => setShowQR(true)}
+        >
           Give Attendance
         </Button>
-       <Row style={{display: 'flex', justifyContent: 'center'}}>
-      <Col span = {15} lg = {15} sm = {22} md = {20} xs = {24}>
-        <QrReader
-          onResult={(result, error) => {
-            if (!!result) {
-              setData(result?.text);
-            }
+        {showQR && (
+          <Row style={{ display: "flex", justifyContent: "center" }}>
+            <Col span={15} lg={15} sm={22} md={20} xs={24}>
+              <QrReader
+                onResult={(result, error) => {
+                  if (!!result) {
+                    setData(result?.text);
+                  }
 
-            if (!!error) {
-              console.info(error);
-            }
-          }}
-          style={{ width: "50%" }}
-        />
-        <p>{data}</p>
-        </Col>
-      </Row>
+                  if (!!error) {
+                    console.info(error);
+                  }
+                }}
+                style={{ width: "50%" }}
+              />
+              <p>{data}</p>
+            </Col>
+          </Row>
+        )}
       </Col>
-
     </Row>
   );
 };
