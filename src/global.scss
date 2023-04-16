@@ -63,7 +63,9 @@ code {
 .ant-input::placeholder {
   color: gray !important;
 }
-
+.ant-select-selection-search {
+  background: linear-gradient(right, transparent, var(--subtheme-color, var(--sub-primary-color)));
+}
 .ant-input{
   background-color: var(--theme-color);
   color: var(--sub-primary-color);

@@ -1,31 +1,70 @@
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Select } from "antd";
 import React from "react";
+import classes from "./index.module.scss";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 const Student = () => {
-  const [data, setData] = useState("No result");
+  const [data, setData] = useState("");
+  const [selected, setSelected] = useState("environment");
+  const [startScan, setStartScan] = useState(false);
+  const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const handleScan = async (scanData) => {
+    setLoadingScan(true);
+    console.log(`loaded data data`, scanData);
+    if (scanData && scanData !== "") {
+      console.log(`loaded >>>`, scanData);
+      setData(scanData);
+      setStartScan(false);
+      setLoadingScan(false);
+      // setPrecScan(scanData);
+    }
+  };
+  const onSelectChange = (value) => {
+    setSelected(value);
+  };
   return (
     <Row>
       <Col span={24}>
         <Button
           type="primary"
-          style={{ marginTop: "1rem" }}
+          style={{ marginTop: "1rem", marginBottom: "1.5rem" }}
           onClick={() => setShowQR(true)}
         >
           Give Attendance
         </Button>
         {showQR && (
           <Row style={{ display: "flex", justifyContent: "center" }}>
-            <Col span={15} lg={15} sm={22} md={20} xs={24}>
+            <Col
+              span={15}
+              lg={15}
+              sm={22}
+              md={20}
+              xs={24}
+              className={classes.scanContainer}
+            >
+              <Select
+                defaultValue={selected}
+                className={classes.selectOptions}
+                onChange={onSelectChange}
+                allowClear
+                options={[
+                  {
+                    value: "environment",
+                    label: "Back Camera",
+                  },
+                  {
+                    value: "user",
+                    label: "Front Camera",
+                  },
+                ]}
+              />
               <QrReader
+                facingMode={selected}
+                onScan={handleScan}
                 onResult={(result, error) => {
                   if (!!result) {
                     setData(result?.text);
-                  }
-
-                  if (!!error) {
-                    console.info(error);
                   }
                 }}
                 style={{ width: "50%" }}

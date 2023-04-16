@@ -21,3 +21,15 @@
 .qrModal{
     background-color: var(--subtheme-color) !important;
 }
+
+.scanContainer{
+  border-radius: 0.5rem;
+  background-color: var(--subtheme-color) !important;
+  padding: 1.5rem 1rem;
+}
+
+@media (max-width: 576px) {
+  .scanContainer{
+    padding: 1rem 0.5rem;
+  }
+}
