@@ -41,7 +41,18 @@
   .closeIcon {
     display: none;
   }
+  .user{
+    color: var(--primary-color) !important;
+    font-size: 1rem !important;
+    margin-top: 0.8rem;
+    }
   
+  .logOut{
+    color: var(--primary-color) !important;
+    margin-top: 0.8rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
   @media (max-width: 1200px) {
     .menuTop {
       padding: 0.5rem 2rem 0.5rem 2rem !important;

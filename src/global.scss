@@ -64,12 +64,37 @@ code {
   color: gray !important;
 }
 
+.ant-input{
+  background-color: var(--theme-color);
+  color: var(--sub-primary-color);
+  border-color: var(--theme-color);
+  caret-color: var(--sub-primary-color);
+}
+.ant-input::placeholder{
+  font-family:   "Josefin Sans", sans-serif  , Courier New, Courier, monospace;
+}
+
+.ant-form-item .ant-form-item-label >label{
+  color: var(--sub-primary-color) !important;
+}
 
 .container {
   padding-inline: 8vw;
 }
+.ant-tabs-top > .ant-tabs-nav::before { /* For the line to the right and close to the tabs */
+  border-color: var(--subtheme-color);
+}
+.ant-tabs-tab-btn {
+  font-size: 1.2rem;
+}
 
+.ant-modal .ant-modal-content{
+  background-color: var(--sub-theme-color);
+}
 
+.anticon >* {
+color: var(--sub-primary-color);
+}
 @media (max-width: 1200px) {
   .container {
      padding-inline: 2rem !important;

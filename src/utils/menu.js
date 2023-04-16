@@ -25,10 +25,7 @@ export const MENU_ITEMS = [
       key: "digital_id",
  
     },
-    {
-      label: "Sustainabliity",
-      key: "sustainabliity",
-    },
+  
    
     
   ];

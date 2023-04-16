@@ -2,9 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Menu, Row } from "antd";
 import { MENU_ITEMS } from "../../utils/menu";
 import classes from "./MenuTop.module.scss";
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { auth, provider } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { loginActions } from "../../redux/redux";
+import { useSelector } from 'react-redux';
+
 const MenuTop = (props) => {
+  const user = useSelector(state=>state.user)
+  const [isLoginned, setIsLoggined] = useState(false);
   const [current, setCurrent] = useState("mail");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -20,6 +27,21 @@ const MenuTop = (props) => {
     return () => window.removeEventListener("resize", updateWindowDimensions);
   }, []);
 
+
+  // Google Login
+  const dispatch = useDispatch();
+  const signIn = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        dispatch(loginActions.login({ user: result.user }));
+        setIsLoggined(true);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
   // action to be performed after clicking menu
   const onClick = (e) => {
     console.log("click ", e);
@@ -29,8 +51,8 @@ const MenuTop = (props) => {
 
   // for responsive menu declaring area
   let logoSpan = 6,
-    buttonSpan = 3,
-    menuSpan = 15;
+    buttonSpan = 4,
+    menuSpan = 14;
   if (windowWidth > 930 && windowWidth <= 1200) {
     logoSpan = 24;
     menuSpan = 20;
@@ -101,13 +123,22 @@ const MenuTop = (props) => {
           xs={8}
           className={classes.buttonArea}
         >
-          <Button
+
+          {
+            isLoginned ? <div>
+              <strong className={classes.user}>{user.displayName}</strong>
+              <LogoutOutlined className={classes.logOut}/>:
+              </div>:
+              <Button
             size={windowWidth <= 930 ? "default" : "large"}
             className={classes.exploreButton}
+            onClick={signIn}
             type = "primary"
           >
            Google Login
           </Button>
+          }
+          
         </Col>
       </Row>
     </div>
