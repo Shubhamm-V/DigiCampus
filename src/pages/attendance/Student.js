@@ -6,8 +6,8 @@ import { useState } from "react";
 const Student = () => {
   const [data, setData] = useState("");
   const [selected, setSelected] = useState("environment");
-  const [startScan, setStartScan] = useState(false);
-  const [loadingScan, setLoadingScan] = useState(false);
+  // const [startScan, setStartScan] = useState(false);
+  // const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const handleScan = async (scanData) => {
     setLoadingScan(true);
