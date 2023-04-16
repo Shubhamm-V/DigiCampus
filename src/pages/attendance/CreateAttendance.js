@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Form, Input, Button, Modal } from "antd";
 import QRCode from "react-qr-code";
-import { QrReader } from 'react-qr-reader';
 
 import classes from "./index.module.scss";
 const CreateAttendance = () => {
-    const [data, setData] = useState('No result');
 
   const [value, setValue] = useState('');
   const [isQRVisible, setQRVisible] = useState(false);
@@ -121,7 +119,6 @@ const CreateAttendance = () => {
           title="GeeksForGeeks"
           value={value}
           bgColor={"#fff"}
-          style={{height: '200px', width: '200px'}}
           fgColor={"#000"}
         />
       </Modal>
