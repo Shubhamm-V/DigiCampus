@@ -4,28 +4,30 @@ import QRCode from "react-qr-code";
 
 import classes from "./index.module.scss";
 const CreateAttendance = () => {
-
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [isQRVisible, setQRVisible] = useState(false);
   const onFinish = (values) => {
     // setValue(values);
     setQRVisible(true);
-    console.log("Success:", values); 
+    console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
-
-  useEffect(()=>{
-    setTimeout(()=>{
-        setValue(prevState=>prevState+1)
-    }, 20000)
-  }, [value])
+  useEffect(() => {
+    setTimeout(() => {
+      setValue((prevState) => prevState + 1);
+    }, 20000);
+  }, [value]);
 
   return (
-    <Row style={{ padding: "0.5rem 1rem" }}>
-      <Col span={24} className={classes.createFormContainer}>
+    <Row style={{ padding: "0.5rem 0.2rem" }} gutter={[5]}>
+      <Col
+        span={24}
+        className={classes.createFormContainer}
+        style={{ paddingInline: "0.5rem" }}
+      >
         <Form
           name="basic"
           layout="vertical"
@@ -34,7 +36,7 @@ const CreateAttendance = () => {
           autoComplete="off"
         >
           <Row gutter={[20]}>
-            <Col span={12}>
+            <Col span={12} md={12} sm={24} xs={24}>
               <Form.Item
                 label="Subject Name"
                 name="subject"
@@ -50,7 +52,7 @@ const CreateAttendance = () => {
               </Form.Item>
             </Col>
 
-            <Col span={12}>
+            <Col span={12} md={12} sm={24} xs={24}>
               <Form.Item
                 label="Branch Name"
                 name="branch"
@@ -66,7 +68,7 @@ const CreateAttendance = () => {
             </Col>
           </Row>
           <Row gutter={[20]}>
-            <Col span={12}>
+            <Col span={12} md={12} sm={24} xs={24}>
               <Form.Item
                 label="Total Students"
                 name="total_students"
@@ -108,7 +110,7 @@ const CreateAttendance = () => {
         className={classes.qrModal}
         bodyStyle={{
           backgroundColor: "#393e46",
-          maxHeight: '80vh',
+          maxHeight: "80vh",
           display: "flex",
           justifyContent: "center",
           padding: "1.5rem 0",
