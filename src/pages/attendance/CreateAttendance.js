@@ -85,7 +85,7 @@ const CreateAttendance = () => {
           </Row>
 
           <Row style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Col span={4} xl={4} lg={5} md={6} sm={8} xs={9}>
+            <Col span={4} xl={4} lg={5} md={6} sm={8} xs={12}>
               <Form.Item>
                 <Button
                   type="primary"
