@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Form, Input, Button, Modal } from "antd";
 import QRCode from "react-qr-code";
+import { QrReader } from 'react-qr-reader';
 
 import classes from "./index.module.scss";
 const CreateAttendance = () => {
-  const [value, setValue] = useState();
+    const [data, setData] = useState('No result');
+
+  const [value, setValue] = useState('');
   const [isQRVisible, setQRVisible] = useState(false);
   const onFinish = (values) => {
-    setValue(values);
+    // setValue(values);
     setQRVisible(true);
-    console.log("Success:", values);
+    console.log("Success:", values); 
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+
+  useEffect(()=>{
+    setTimeout(()=>{
+        setValue(prevState=>prevState+1)
+    }, 20000)
+  }, [value])
+
   return (
     <Row style={{ padding: "0.5rem 1rem" }}>
       <Col span={24} className={classes.createFormContainer}>
@@ -97,13 +108,20 @@ const CreateAttendance = () => {
         footer={false}
         centered
         className={classes.qrModal}
-        bodyStyle={{backgroundColor: '#393e46', margin: '0'}}
+        bodyStyle={{
+          backgroundColor: "#393e46",
+          maxHeight: '80vh',
+          display: "flex",
+          justifyContent: "center",
+          padding: "1.5rem 0",
+        }}
         onCancel={() => setQRVisible(false)}
       >
         <QRCode
           title="GeeksForGeeks"
           value={value}
           bgColor={"#fff"}
+          style={{height: '200px', width: '200px'}}
           fgColor={"#000"}
         />
       </Modal>
