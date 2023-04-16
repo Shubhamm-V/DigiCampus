@@ -1,14 +1,56 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Form, Input, Button, Modal } from "antd";
 import QRCode from "react-qr-code";
-
 import classes from "./index.module.scss";
-const CreateAttendance = () => {
-  const [value, setValue] = useState("");
+import db from "../../firebase";
+const CreateAttendance = ({ docID }) => {
+  const [value, setValue] = useState(0);
+  const [indentifier, setIdentifier] = useState(false);
   const [isQRVisible, setQRVisible] = useState(false);
+  const [students, setStudents] = useState([]);
+  const [isAttendanceFinished, setISAttendanceFinished] = useState(false);
+  const formRef = React.useRef(null);
+  const [qrValue, setQRValue] = useState({});
+  function compare(a, b) {
+    if (a.rollno < b.rollno) {
+      return -1;
+    }
+    if (a.rollno > b.rollno) {
+      return 1;
+    }
+    return 0;
+  }
+
   const onFinish = (values) => {
     // setValue(values);
+
+    const userRef = db.collection("users").doc(docID).collection("students");
+    // Query the orders subcollection to retrieve all order documents
+    let arrayData = [];
+    userRef
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().branch === values.branch) arrayData.push(doc.data());
+        });
+        arrayData.sort(compare);
+        setStudents(arrayData);
+      })
+      .catch((error) => {
+        console.log("Error getting orders: ", error);
+      });
+      let unique = values.subject+values.branch+values.date;
+      unique = unique.trim();
+      setIdentifier(unique);
+      db.collection("users").doc(docID).collection("attendances").add({
+        subject: values.subject,
+        branch: values.branch,  
+        total_students: values.total_students,
+        date: new Date().toLocaleString(),
+        unique
+      });
     setQRVisible(true);
+    formRef.current?.resetFields();
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
@@ -16,10 +58,19 @@ const CreateAttendance = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setValue((prevState) => prevState + 1);
-    }, 20000);
-  }, [value]);
+    if (isQRVisible) {
+      if (value === students.length && value > 0) {
+        setISAttendanceFinished(true);
+      }
+      if (value < students.length) {
+        setQRValue(students[value]);
+        setTimeout(() => {
+          setValue((prevState) => prevState + 1);
+        }, 5000);
+      }
+    }
+    console.log("qrvalue", value);
+  }, [value, isQRVisible, students]);
 
   return (
     <Row style={{ padding: "0.5rem 0.2rem" }} gutter={[5]}>
@@ -30,6 +81,7 @@ const CreateAttendance = () => {
       >
         <Form
           name="basic"
+          ref={formRef}
           layout="vertical"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -96,7 +148,7 @@ const CreateAttendance = () => {
                     marginTop: "1rem",
                   }}
                 >
-                  Submit
+                  Create
                 </Button>
               </Form.Item>
             </Col>
@@ -111,18 +163,51 @@ const CreateAttendance = () => {
         bodyStyle={{
           backgroundColor: "#393e46",
           maxHeight: "80vh",
-          display: "flex",
-          justifyContent: "center",
           padding: "1.5rem 0",
         }}
         onCancel={() => setQRVisible(false)}
       >
-        <QRCode
-          title="GeeksForGeeks"
-          value={value}
-          bgColor={"#fff"}
-          fgColor={"#000"}
-        />
+        <Row>
+          <Col span={24} style={{ display: "flex", justifyContent: "center" }}>
+            {isAttendanceFinished ? (
+              <h1 style={{ color: "var(--sub-primary-color)" }}>
+                Attendance Finished
+              </h1>
+            ) : (
+              <QRCode
+                title={qrValue.name}
+                value={`${qrValue.rollno}"," ${indentifier}`}
+                bgColor={"#fff"}
+                fgColor={"#000"}
+              />
+            )}
+          </Col>
+          {!isAttendanceFinished && (
+            <Col
+              span={24}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <h3 style={{ color: "var(--sub-primary-color)" }}>
+                {qrValue.name}  {qrValue.rollno}
+              </h3>
+            </Col>
+          )}
+          {isAttendanceFinished && (
+            <Col
+              span={24}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                paddingInline: "2rem",
+              }}
+            >
+              <Button type="primary" onClick={() => setQRVisible(false)}>
+                {" "}
+                Close{" "}
+              </Button>
+            </Col>
+          )}
+        </Row>
       </Modal>
     </Row>
   );

@@ -2,13 +2,19 @@ import { Row, Col, Menu } from "antd";
 import React, { useEffect, useState } from "react";
 import classes from "./index.module.scss";
 import CreateAttendance from "./CreateAttendance";
+import AddStudent from "./AddStudent";
+import db from "../../firebase";
+import { useSelector } from "react-redux";
 const ITEMS = [
+  { key: "add_student", label: "Add Student" },
   { key: "create_attendance", label: "Create Attendance" },
   { key: "view_attendance", label: "View Attendance" },
 ];
 const Teacher = () => {
   const [checkMenu, setCheckMenu] = useState("create_attendance");
+  const user = useSelector((state) => state.user);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [docID, setDocID] = useState(null);
   // to get screenwidht for managing responsiveness as screenwidht decrease or increase
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -18,6 +24,22 @@ const Teacher = () => {
     window.addEventListener("resize", updateWindowDimensions);
     return () => window.removeEventListener("resize", updateWindowDimensions);
   }, []);
+
+  useEffect(() => {
+    const email = user.email;
+    const usersRef = db.collection("users");
+    usersRef
+      .where("email", "==", email)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          setDocID(doc.id);
+        });
+      })
+      .catch((error) => {
+        console.error("Error getting documents: ", error);
+      });
+  }, [user.email]);
 
   const onClick = (e) => {
     setCheckMenu(e.key);
@@ -33,13 +55,9 @@ const Teacher = () => {
           className={classes.teacherMenu}
         />
       </Col>
-      <Col
-        span={19}
-        sm={15}
-        lg={19}
-        xs={24}
-      >
-        {checkMenu === "create_attendance" && <CreateAttendance />}
+      <Col span={19} sm={15} lg={19} xs={24}>
+        {checkMenu === "add_student" && <AddStudent docID = {docID} />}
+        {checkMenu === "create_attendance" && <CreateAttendance docID = {docID} />}
         {checkMenu === "view_attendance" && <h2>view attendance</h2>}
       </Col>
     </Row>
