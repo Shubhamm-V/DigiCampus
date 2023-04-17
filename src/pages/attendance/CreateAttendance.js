@@ -69,7 +69,7 @@ const CreateAttendance = ({ docID }) => {
         setQRValue(students[value]);
         setTimeout(() => {
           setValue((prevState) => prevState + 1);
-        }, 30000);
+        }, 20000);
       }
     }
     console.log("qrvalue", value);

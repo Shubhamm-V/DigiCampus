@@ -12,7 +12,7 @@ const ITEMS = [
   { key: "view_attendance", label: "View Attendance" },
 ];
 const Teacher = () => {
-  const [checkMenu, setCheckMenu] = useState("create_attendance");
+  const [checkMenu, setCheckMenu] = useState("add_student");
   const user = useSelector((state) => state.user);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [docID, setDocID] = useState(null);
@@ -53,6 +53,7 @@ const Teacher = () => {
           onClick={onClick}
           mode={windowWidth <= 576 ? "horizontal" : "vertical"}
           items={ITEMS}
+          defaultActiveFirst={["add_student"]}
           className={classes.teacherMenu}
         />
       </Col>
