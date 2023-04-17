@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Menu, Row, notification} from "antd";
+import { Button, Col, Menu, Row, notification } from "antd";
 import { MENU_ITEMS } from "../../utils/menu";
 import classes from "./MenuTop.module.scss";
 import { MenuOutlined, CloseOutlined, LogoutOutlined } from "@ant-design/icons";
@@ -79,10 +79,10 @@ const MenuTop = (props) => {
 
   // action to be performed after clicking menu
   const onClick = (e) => {
-    if(e.key==='pages/attendance' && !user){
+    if (e.key === "pages/attendance" && !user) {
       notification.open({
-        status: 'success',
-        message: 'Please Login First to Access',
+        status: "success",
+        message: "Please Login First to Access",
       });
       return;
     }
@@ -168,7 +168,12 @@ const MenuTop = (props) => {
             {isLoginned ? (
               <div>
                 <strong className={classes.user}>{user.displayName}</strong>
-                <LogoutOutlined className={classes.logOut} />:
+                <LogoutOutlined
+                  className={classes.logOut}
+                  onClick={() => {dispatch(loginActions.login({ user: null })); navigate('/')}}
+                  
+                />
+                :
               </div>
             ) : (
               <Button

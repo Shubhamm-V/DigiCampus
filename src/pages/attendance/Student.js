@@ -26,7 +26,7 @@ const Student = () => {
           setTimeout(()=>{
             notification.open({
               status: 'success',
-               message: 'Please Login First to Access',
+               message: 'Attendance Taken Successfully',
               });
               navigate('/');
           },5000)
