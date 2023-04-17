@@ -15,8 +15,16 @@ const Student = () => {
     setSelected("environment");
   }, []);
   useEffect(()=>{
-    addAttendance();
-  },[data])
+    db.collection("attendance")
+    .add({
+      studentdetails: data,
+    })
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });  },[data])
   const handleScan = async (scanData) => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
@@ -29,18 +37,7 @@ const Student = () => {
       // setPrecScan(scanData);
     }
   };
-  const addAttendance = () => {
-    db.collection("attendance")
-      .add({
-        studentdetails: data,
-      })
-      .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-  };
+  
   return (
     <Row>
       <Col span={24}>
@@ -84,7 +81,7 @@ const Student = () => {
             {gotData && (
               <Row>
                 <Col span={24}>
-                  <Button type="primary" onClick={addAttendance}>
+                  <Button type="primary">
                     Mark as Present
                   </Button>
                 </Col>
