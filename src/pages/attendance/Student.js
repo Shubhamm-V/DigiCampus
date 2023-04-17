@@ -20,9 +20,10 @@ const Student = () => {
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
       const usersRef = db.collection("attendance");
+      prompt(scanData);
       usersRef
         .doc((scanData).trim())
-        .set({
+        .add({
           studentdetails: scanData,
         })
         .then(() => {
