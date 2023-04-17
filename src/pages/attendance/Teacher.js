@@ -5,6 +5,7 @@ import CreateAttendance from "./CreateAttendance";
 import AddStudent from "./AddStudent";
 import db from "../../firebase";
 import { useSelector } from "react-redux";
+import ViewAttendance from "./ViewAttendance";
 const ITEMS = [
   { key: "add_student", label: "Add Student" },
   { key: "create_attendance", label: "Create Attendance" },
@@ -58,7 +59,7 @@ const Teacher = () => {
       <Col span={19} sm={15} lg={19} xs={24}>
         {checkMenu === "add_student" && <AddStudent docID = {docID} />}
         {checkMenu === "create_attendance" && <CreateAttendance docID = {docID} />}
-        {checkMenu === "view_attendance" && <h2>view attendance</h2>}
+        {checkMenu === "view_attendance" &&  <ViewAttendance/>}
       </Col>
     </Row>
   );

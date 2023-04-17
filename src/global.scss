@@ -28,7 +28,16 @@ code {
   "Courier New", monospace;
 }
 
-
+.ant-table-thead .ant-table-cell {
+  background-color: var(--theme-color) !important;
+  border: 1px solid gray   !important;
+  color: var(--sub-primary-color) !important;
+} 
+.ant-table-tbody .ant-table-cell {
+  background-color: var(--subtheme-color) !important;
+  border: 1px solid gray !important;
+  color: var(--sub-primary-color) !important;
+} 
 .ant-menu-submenu-title:hover {
   .ant-menu-submenu-arrow::before,
   .ant-menu-submenu-arrow::after {

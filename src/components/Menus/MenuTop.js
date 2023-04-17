@@ -52,6 +52,10 @@ const MenuTop = (props) => {
                   email: email,
                 })
                 .then(() => {
+                  notification.open({
+                    status: "success",
+                    message: "Login successful",
+                  });
                   console.log("Email added to users collection");
                 })
                 .catch((error) => {
@@ -62,7 +66,10 @@ const MenuTop = (props) => {
                 });
             } else {
               // 4b. If the email already exists in the "users" collection, log a message
-              console.log("Email already exists in users collection");
+              notification.open({
+                status: "success",
+                message: "Login successful",
+              });
             }
           })
           .catch((error) => {
@@ -170,8 +177,9 @@ const MenuTop = (props) => {
                 <strong className={classes.user}>{user.displayName}</strong>
                 <LogoutOutlined
                   className={classes.logOut}
-                  onClick={() => {dispatch(loginActions.login({ user: null })); navigate('/')}}
-                  
+                  onClick={() => {
+                    setIsLoggined(false);
+                    dispatch(loginActions.login({ user: null })); navigate('/')}}
                 />
                 :
               </div>

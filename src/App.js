@@ -9,6 +9,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path = "pages/attendance/" element = {<Attendance/>} />
       </Routes>
+      {/* <Footer/> */}
     </MenuTop>
   );
 }
