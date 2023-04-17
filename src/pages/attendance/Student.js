@@ -1,16 +1,17 @@
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, notification } from "antd";
 import React, { useEffect } from "react";
 import classes from "./index.module.scss";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 import db from "../../firebase";
+import { useNavigate } from "react-router-dom";
 const Student = () => {
   const [data, setData] = useState("");
   const [selected, setSelected] = useState("");
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
-  const [navigate, useNavigate] = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     setSelected("environment");
   }, []);
@@ -34,7 +35,7 @@ const Student = () => {
           console.error("Error adding document: ", error);
         });
     }
-  }, [data]);
+  }, [data, navigate]);
   const handleScan = async (scanData) => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
