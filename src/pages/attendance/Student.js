@@ -18,7 +18,7 @@ const Student = () => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
-      firestore.collection("attendance").add({
+      db.collection("attendance").add({
         text: scanData,
       });
       setData(scanData);
