@@ -10,15 +10,17 @@ const Student = () => {
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
 
-  useEffect(()=>{
-    setSelected('environment')
-  },[])
+  useEffect(() => {
+    setSelected("environment");
+  }, []);
 
   const handleScan = async (scanData) => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
-      console.log(`loaded >>>`, scanData);
+      firestore.collection("attendance").add({
+        text: scanData,
+      });
       setData(scanData);
       setStartScan(false);
       setLoadingScan(false);
@@ -56,7 +58,15 @@ const Student = () => {
                 }}
                 style={{ width: "50%" }}
               />
-              <p>{data}</p>
+              <p
+                style={{
+                  textAlign: "center",
+                  color: "greenyellow",
+                  fontWeight: "bold",
+                }}
+              >
+                {data}
+              </p>
             </Col>
           </Row>
         )}
