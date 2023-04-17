@@ -10,9 +10,9 @@ const Student = () => {
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
 
-  useEffect(() => {
-    setSelected("environment");
-  }, []);
+  useEffect(()=>{
+    setSelected('environment')
+  },[])
 
   const handleScan = async (scanData) => {
     setLoadingScan(true);
@@ -56,15 +56,7 @@ const Student = () => {
                 }}
                 style={{ width: "50%" }}
               />
-              <p
-                style={{
-                  textAlign: "center",
-                  color: "greenyellow",
-                  fontWeight: "bold",
-                }}
-              >
-                {data}
-              </p>
+              <p>{data}</p>
             </Col>
           </Row>
         )}
