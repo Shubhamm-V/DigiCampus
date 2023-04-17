@@ -19,16 +19,9 @@ const Student = () => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
-      const usersRef = db.collection("attendance");
-      const newDocRef = usersRef.doc();
-      newDocRef
-        .set(scanData)
-        .then(() => {
-          console.log("Data added successfully");
-        })
-        .catch((error) => {
-          console.error("Error adding data: ", error);
-        });
+      db.collection("attendance").add({
+        studentdetails: scanData,
+    })
       setData(scanData);
       setStartScan(false);
       setLoadingScan(false);
