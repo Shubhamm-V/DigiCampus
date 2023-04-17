@@ -72,6 +72,12 @@ const Student = () => {
                 }}
               >
                 {scanData && scanData.name - "Present"}
+                <br/>
+                {scanData.rollno}
+                <br/>
+                {scanData.branch}
+                <br/>
+                {scanData.unique}
               </p>
             </Col>
           </Row>

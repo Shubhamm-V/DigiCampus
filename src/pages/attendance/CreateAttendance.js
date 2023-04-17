@@ -23,7 +23,13 @@ const CreateAttendance = ({ docID }) => {
 
   const onFinish = (values) => {
     // setValue(values);
-    let date = new Date().toLocaleString();
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    date = `${day}-${month}-${year}`;
+
     let unique = values.subject + values.branch + date;
     unique = unique.trim();
     setIdentifier(unique);
