@@ -10,6 +10,7 @@ const Student = () => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [navigate, useNavigate] = useNavigate();
   useEffect(() => {
     setSelected("environment");
   }, []);
@@ -21,6 +22,13 @@ const Student = () => {
         })
         .then((docRef) => {
           console.log("Document written with ID: ", docRef.id);
+          setTimeout(()=>{
+            notification.open({
+              status: 'success',
+               message: 'Please Login First to Access',
+              });
+              navigate('/');
+          },5000)
         })
         .catch((error) => {
           console.error("Error adding document: ", error);
