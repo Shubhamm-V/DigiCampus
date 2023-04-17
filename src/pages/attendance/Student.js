@@ -9,7 +9,7 @@ const Student = () => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
-  const [scanData, setScanData] = useState(null);
+  const [scanData, setScanData] = useState({});
 
   useEffect(() => {
     setSelected("environment"); 
@@ -77,7 +77,7 @@ const Student = () => {
               >
                 {data  - "Present"}
                 <br/>
-                {scanData.name  - "Absent"}
+                {scanData && (scanData.name  - "Absent")}
         
               </p>
             </Col>
