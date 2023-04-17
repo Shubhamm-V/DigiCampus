@@ -182,7 +182,7 @@ const CreateAttendance = ({ docID }) => {
             ) : (
               <QRCode
                 title={qrValue.name}
-                value={`${qrValue.rollno} - ${qrValue.name}`}
+                value={`${qrValue.rollno},${qrValue.name},${qrValue.branch},${indentifier}`}
                 bgColor={"#fff"}
                 fgColor={"#000"}
               />
