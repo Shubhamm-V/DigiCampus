@@ -9,7 +9,7 @@ const Student = () => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
-  const [scanData, setScanData] = useState({});
+  const [scanData, setScanData] = useState(null);
 
   useEffect(() => {
     setSelected("environment"); 
@@ -24,6 +24,10 @@ const Student = () => {
         branch: dataFromScan[2],
         unique: dataFromScan[3],
     })
+    prompt(dataFromScan[0])
+    prompt(dataFromScan[1])
+    prompt(dataFromScan[2])
+    prompt(dataFromScan[3])
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
       console.log(`loaded >>>`, scanData);
@@ -71,13 +75,8 @@ const Student = () => {
                   fontWeight: "bold",
                 }}
               >
-                {scanData && scanData.name - "Present"}
-                <br/>
-                {scanData.rollno}
-                <br/>
-                {scanData.branch}
-                <br/>
-                {scanData.unique}
+                {scanData &&  (scanData.name - "Present")}
+        
               </p>
             </Col>
           </Row>
