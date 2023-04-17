@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import classes from "./index.module.scss";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
+import db from "../../firebase";
 const Student = () => {
   const [data, setData] = useState("");
   const [selected, setSelected] = useState("");
