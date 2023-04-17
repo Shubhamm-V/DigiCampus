@@ -4,6 +4,7 @@ import classes from "./index.module.scss";
 import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 const Student = () => {
+  const [data, setData] = useState("");
   const [selected, setSelected] = useState("");
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
@@ -13,7 +14,7 @@ const Student = () => {
   useEffect(() => {
     setSelected("environment"); 
   }, []);
-
+  console.log(data);
   const handleScan = async (scanData) => {
     setLoadingScan(true);
     let dataFromScan = scanData.split(",");
