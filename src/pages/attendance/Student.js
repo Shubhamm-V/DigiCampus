@@ -9,13 +9,21 @@ const Student = () => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [scanData, setScanData] = useState({});
 
   useEffect(() => {
-    setSelected("environment");
+    setSelected("environment"); 
   }, []);
 
   const handleScan = async (scanData) => {
     setLoadingScan(true);
+    let dataFromScan = scanData.split(",");
+    setScanData({
+        rollno: dataFromScan[0],
+        name: dataFromScan[1],
+        branch: dataFromScan[2],
+        unique: dataFromScan[3],
+    })
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
       console.log(`loaded >>>`, scanData);
@@ -63,8 +71,7 @@ const Student = () => {
                   fontWeight: "bold",
                 }}
               >
-                {data + '-'}
-                {data && "Present"}
+                {scanData && scanData.name - "Present"}
               </p>
             </Col>
           </Row>
