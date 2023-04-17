@@ -29,10 +29,7 @@ const CreateAttendance = ({ docID }) => {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
     date = `${day}-${month}-${year}`;
-
-    let unique = values.subject + values.branch + date;
-    unique = unique.trim();
-    setIdentifier(unique);
+    setIdentifier(date);
     const userRef = db.collection("users").doc(docID).collection("students");
     // Query the orders subcollection to retrieve all order documents
     let arrayData = [];
@@ -53,7 +50,7 @@ const CreateAttendance = ({ docID }) => {
       branch: values.branch,
       total_students: values.total_students,
       date,
-      unique,
+      unique: date,
     });
     setQRVisible(true);
     formRef.current?.resetFields();
