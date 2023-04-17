@@ -19,7 +19,7 @@ const Student = () => {
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
       db.collection("attendance").add({
-        text: scanData,
+        student: scanData,
       });
       setData(scanData);
       setStartScan(false);
