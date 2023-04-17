@@ -14,7 +14,9 @@ const Student = () => {
   useEffect(() => {
     setSelected("environment");
   }, []);
-
+  useEffect(()=>{
+    addAttendance();
+  },[data])
   const handleScan = async (scanData) => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
