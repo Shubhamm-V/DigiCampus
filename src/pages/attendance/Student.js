@@ -10,7 +10,7 @@ const Student = () => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [showQR, setShowQR] = useState(false);
-
+  const [gotData, setGotData] = useState(false);
   useEffect(() => {
     setSelected("environment");
   }, []);
@@ -19,26 +19,25 @@ const Student = () => {
     setLoadingScan(true);
     console.log(`loaded data data`, scanData);
     if (scanData && scanData !== "") {
-      const usersRef = db.collection("attendance");
-      prompt(scanData);
-      usersRef
-        .doc((scanData).trim())
-        .add({
-          studentdetails: scanData,
-        })
-        .then(() => {
-          console.log("Attendance added to collection");
-        })
-        .catch((error) => {
-          console.error("Error adding attendance to collection: ", error);
-        });
-
+      setGotData(true);
       setData(scanData);
       setStartScan(false);
       setLoadingScan(false);
       console.log(startScan, loadingScan);
       // setPrecScan(scanData);
     }
+  };
+  const addAttendance = () => {
+    db.collection("attendance")
+      .add({
+        studentdetails: data,
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
   };
   return (
     <Row>
@@ -80,6 +79,15 @@ const Student = () => {
                 {data}
               </p>
             </Col>
+            {gotData && (
+              <Row>
+                <Col span={24}>
+                  <Button type="primary" onClick={addAttendance}>
+                    Mark as Present
+                  </Button>
+                </Col>
+              </Row>
+            )}
           </Row>
         )}
       </Col>
