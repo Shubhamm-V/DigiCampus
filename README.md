@@ -18,7 +18,7 @@ Therefore, we have to build a web applicaion that can simplify college processes
 
 <h3>Solution: </h3>
 
-We developed Proxy Free QR Based Attendance web application where no one can give attendance of other students.
+We developed Proxy Free QR Based Attendance web application where no one can give attendance of other students. So, teacher don't have rely on paper for attendance and it will be more convient for both students and teachers too.
 
 <h4>How it works? </h4>
 1. First by using google authentication, user have to login and then he/she will have access to attendance section. <br/>
