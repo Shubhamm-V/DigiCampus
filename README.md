@@ -4,7 +4,7 @@
 Site is hosted at URL: https://digiicampus.netlify.app/
 <br/>
 
-<strong>This is hackathon project and won the national level hackathon by pragyaa at SGGS Engineering college Nanded, Maharashtra (India) by beating up 25-30 teams from different colleges. My team name was Phantom Troupe and I was the team leader too. </strong>
+<strong>This is hackathon project and won the National Level Hackathon by pragyaa at SGGS Engineering college Nanded, Maharashtra (India) by beating up 25-30 teams from different colleges. My team name was Phantom Troupe and I was the team leader too. </strong>
 
 <h3>Problem Statement: Digitalization of College Campus</h3>
 
