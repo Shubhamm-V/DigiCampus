@@ -12,7 +12,7 @@ Site is hosted at URL: https://digiicampus.netlify.app/
 
 Despite teh advancement of technology many college campuses still rely on paper-based processes. this not only results in inefficiencies but also increases workload for staff and paper wastage. To address this, a web application needs to be developed that can digitilise various college processes making them paperless, efficient and less time-consuming.
 
-The current paper-based system poses seevral challanges such as manual efforts and data loss. In addition, it also makes it difficult for students and faculty to access important information quickly and asily, which leads to delays in the processes and creaes incovenience for everyoune involved. 
+The current paper-based system poses seevral challanges such as manual efforts and data loss. In addition, it also makes it difficult for students and faculty to access important information quickly and asily, which leads to delays in the processes and creates incovenience for everyoune involved. 
 
 Therefore, we have to build a web applicaion that can simplify college processes, reduce paper usage and increase effciency.
 
